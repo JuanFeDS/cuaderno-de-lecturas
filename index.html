@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cuaderno de lecturas</title>
+<link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+<div class="envoltura">
+
+
+<header class="portada">
+  <div>
+    <p class="ceja" id="ceja-rango">Registro de lectura</p>
+    <h1>Cuaderno de <em>lecturas</em></h1>
+  </div>
+  <button id="btn-tema" type="button">Cambiar tema</button>
+</header>
+
+<nav class="pestanas" role="tablist" aria-label="Secciones del cuaderno">
+  <button role="tab" id="tab-estanteria" aria-controls="panel-estanteria" aria-selected="true">La estantería</button>
+  <button role="tab" id="tab-anios" aria-controls="panel-anios" aria-selected="false">Los años</button>
+  <button role="tab" id="tab-generos" aria-controls="panel-generos" aria-selected="false">Los géneros</button>
+  <button role="tab" id="tab-autores" aria-controls="panel-autores" aria-selected="false">Los autores</button>
+  <button role="tab" id="tab-califs" aria-controls="panel-califs" aria-selected="false">Calificaciones</button>
+  <button role="tab" id="tab-ritmo" aria-controls="panel-ritmo" aria-selected="false">El ritmo</button>
+  <button role="tab" id="tab-colecciones" aria-controls="panel-colecciones" aria-selected="false">Colecciones</button>
+  <button role="tab" id="tab-catalogo" aria-controls="panel-catalogo" aria-selected="false">Catálogo</button>
+</nav>
+
+<section id="panel-estanteria" role="tabpanel" aria-labelledby="tab-estanteria" class="activa">
+  <div class="kpis" id="kpis-resumen"></div>
+  <div class="tarjeta ancha">
+    <h2>Todos los libros, lomo a lomo</h2>
+    <p class="nota">Cada lomo es un libro terminado; su altura son las páginas y su color, el género. Pasa el cursor para ver la ficha.</p>
+    <div class="leyenda" id="leyenda-generos"></div>
+    <div class="estanteria"><div class="estantes" id="estantes"></div></div>
+  </div>
+  <p class="frase" id="frase-resumen"></p>
+</section>
+
+<section id="panel-anios" role="tabpanel" aria-labelledby="tab-anios">
+  <p class="frase" id="frase-anios"></p>
+  <div class="rejilla-anios">
+    <div class="columna-anios">
+      <div class="tarjeta">
+        <h2>Libros por año</h2>
+        <p class="nota">Títulos terminados cada año</p>
+        <div id="graf-libros-anio"></div>
+      </div>
+      <div class="tarjeta">
+        <h2>Páginas por año</h2>
+        <p class="nota">Suma de páginas de los libros con registro (casi todas, ediciones digitales)</p>
+        <div id="graf-paginas-anio"></div>
+      </div>
+    </div>
+    <div class="tarjeta tarjeta-calif-anios">
+      <h2>Calificación media por año</h2>
+      <p class="nota">Promedio de la calificación de todas las lecturas del año</p>
+      <div id="graf-calif-anio"></div>
+    </div>
+  </div>
+</section>
+
+<section id="panel-generos" role="tabpanel" aria-labelledby="tab-generos">
+  <p class="frase" id="frase-generos"></p>
+  <div class="tarjeta ancha" style="margin-bottom:16px">
+    <h2>Libros por género</h2>
+    <p class="nota">Un libro puede sumar en más de un género — cada lomo es un libro, agrupados de más a menos frecuente</p>
+    <div id="graf-generos"></div>
+  </div>
+  <div class="rejilla">
+    <div class="tarjeta">
+      <h2>Calificación media por género</h2>
+      <p class="nota">Solo géneros con al menos 3 libros</p>
+      <div class="filas-h" id="graf-calif-genero"></div>
+    </div>
+    <div class="tarjeta columna-apilada">
+      <div>
+        <h2>Tipo de libro</h2>
+        <p class="nota">Autoconclusivos, sagas y demás</p>
+        <div class="filas-h" id="graf-tipos"></div>
+      </div>
+      <div style="margin-top:22px">
+        <h2>Formato</h2>
+        <p class="nota">Proporción entre lecturas digitales y en físico</p>
+        <div id="graf-formato"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="panel-autores" role="tabpanel" aria-labelledby="tab-autores">
+  <p class="frase" id="frase-autores"></p>
+  <div class="tarjeta ancha" style="margin-bottom:16px">
+    <h2>Nacionalidad de los autores</h2>
+    <p class="nota">Mapa de calor por número de libros leídos. Haz clic en un país coloreado, o en la lista, para filtrar sus libros.</p>
+    <div class="cuerpo-mapa">
+      <div>
+        <div id="mapa"></div>
+        <div class="leyenda leyenda-mapa" id="leyenda-mapa"></div>
+      </div>
+      <aside class="panel-paises">
+        <h3 id="titulo-paises">Todos los países</h3>
+        <div id="lista-paises"></div>
+      </aside>
+    </div>
+  </div>
+  <div class="rejilla">
+    <div class="tarjeta">
+      <h2>Autores más leídos</h2>
+      <p class="nota">Número de libros por autor</p>
+      <div class="filas-h" id="graf-autores"></div>
+    </div>
+    <div class="tarjeta">
+      <h2>Autoras y autores</h2>
+      <p class="nota">Autores únicos de la estantería, por sexo</p>
+      <div id="graf-sexo"></div>
+    </div>
+    <div class="tarjeta">
+      <h2>Estado de los autores</h2>
+      <p class="nota">Autores únicos: vivos, fallecidos y suicidios</p>
+      <div id="graf-estado-autores"></div>
+    </div>
+  </div>
+  <div class="tarjeta ancha" style="margin-top:16px">
+    <h2>Cuándo fueron escritos</h2>
+    <p class="nota">Cada casilla es un libro, coloreada por su género; el espacio entre años es proporcional al tiempo transcurrido</p>
+    <div id="graf-publicacion"></div>
+  </div>
+</section>
+
+<section id="panel-califs" role="tabpanel" aria-labelledby="tab-califs">
+  <p class="frase" id="frase-califs"></p>
+  <div class="tarjeta ancha" style="margin-bottom:16px">
+    <h2>Distribución de calificaciones</h2>
+    <p class="nota">Un lomo por libro, coloreado por género, agrupado por tramo de media</p>
+    <div id="graf-distribucion"></div>
+  </div>
+  <div class="tarjeta ancha">
+    <h2>Lo mejor y lo peor</h2>
+    <p class="nota">Elegí una dimensión para ver qué libros la llevaron más alto y cuáles la hundieron más</p>
+    <div class="filtros" id="filtros-dimension"></div>
+    <div class="rankings-dimension">
+      <div>
+        <h3 id="titulo-dim-top"></h3>
+        <div class="lista-libros" id="lista-dim-top"></div>
+      </div>
+      <div class="divisor" aria-hidden="true"></div>
+      <div>
+        <h3 id="titulo-dim-fondo"></h3>
+        <div class="lista-libros" id="lista-dim-fondo"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="panel-ritmo" role="tabpanel" aria-labelledby="tab-ritmo">
+  <div class="kpis" id="kpis-ritmo"></div>
+  <div class="rejilla">
+    <div class="tarjeta ancha">
+      <h2>El ritmo, lectura a lectura</h2>
+      <p class="nota">Páginas por día de cada libro, ubicado en su fecha de fin. Una página digital no equivale a una física: compara dentro de cada formato.</p>
+      <div class="leyenda" id="leyenda-ritmo"></div>
+      <div id="graf-ritmo-tiempo"></div>
+    </div>
+    <div class="tarjeta">
+      <h2>Devorados</h2>
+      <p class="nota">Mayor ritmo, en páginas por día</p>
+      <div class="lista-libros" id="lista-rapidos"></div>
+    </div>
+    <div class="tarjeta">
+      <h2>A fuego lento</h2>
+      <p class="nota">Menor ritmo, en páginas por día</p>
+      <div class="lista-libros" id="lista-lentos"></div>
+    </div>
+  </div>
+</section>
+
+<section id="panel-colecciones" role="tabpanel" aria-labelledby="tab-colecciones">
+  <p class="frase" id="frase-colecciones"></p>
+  <div class="filtros" id="subtabs-colecciones"></div>
+  <div class="tarjeta ancha">
+    <h2 id="titulo-coleccion"></h2>
+    <p class="nota" id="nota-coleccion"></p>
+    <div class="leyenda" id="leyenda-coleccion"></div>
+    <div class="lista-libros" id="lista-coleccion"></div>
+  </div>
+</section>
+
+<section id="panel-catalogo" role="tabpanel" aria-labelledby="tab-catalogo">
+  <div class="tarjeta ancha" id="tarjeta-ficha" style="margin-bottom:16px">
+    <h2>Ficha de lectura</h2>
+    <p class="nota">Elegí un libro (o hacé clic en una fila de la tabla) para ver su perfil de calificación y sus datos generales</p>
+    <div class="fila-buscador">
+      <div class="buscador-libro">
+        <input type="text" id="buscador-libro" class="entrada-buscador" placeholder="Escribí un título o autor…"
+          autocomplete="off" role="combobox" aria-expanded="false" aria-controls="sugerencias-libro" aria-autocomplete="list">
+        <div class="sugerencias" id="sugerencias-libro" role="listbox"></div>
+      </div>
+      <div class="nav-libro">
+        <button type="button" id="libro-anterior" class="btn-nav" aria-label="Libro leído antes">‹</button>
+        <span class="contador-nav" id="contador-libro"></span>
+        <button type="button" id="libro-siguiente" class="btn-nav" aria-label="Libro leído después">›</button>
+      </div>
+    </div>
+    <div class="ficha-libro">
+      <div id="radar-ficha"></div>
+      <div class="ficha-datos" id="datos-ficha"></div>
+    </div>
+  </div>
+  <div class="tarjeta ancha">
+    <h2>Catálogo completo</h2>
+    <p class="nota">Todas las lecturas registradas. Haz clic en una columna para ordenar.</p>
+    <div class="filtros" id="filtros-catalogo"></div>
+    <div class="envoltorio-tabla"><table class="catalogo" id="tabla-catalogo"></table></div>
+  </div>
+  <div class="tarjeta ancha" style="margin-top:16px">
+    <h2>En pausa</h2>
+    <p class="nota">Los que quedaron esperando en la mesa de noche</p>
+    <div class="envoltorio-tabla"><table class="catalogo" id="tabla-pausados"></table></div>
+  </div>
+</section>
+
+</div>
+<div id="tooltip" role="presentation"></div>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
