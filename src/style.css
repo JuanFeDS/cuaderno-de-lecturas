@@ -225,7 +225,7 @@ svg.grafico line.eje { stroke: var(--base); stroke-width: 1; }
 .filtros { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 16px; }
 .filtros .chip {
   background: none; border: 1px solid var(--borde); border-radius: 999px; cursor: pointer;
-  padding: 5px 13px; font: 13px var(--sans); color: var(--tinta-2);
+  padding: 9px 14px; font: 13px var(--sans); color: var(--tinta-2);
 }
 .filtros .chip[aria-pressed="true"] { background: var(--tinta); color: var(--superficie); border-color: var(--tinta); }
 .filtros .interruptor {
@@ -285,7 +285,8 @@ svg.grafico line.eje { stroke: var(--base); stroke-width: 1; }
 .ficha-grid b { color: var(--tinta-2); font-weight: 600; font-variant-numeric: tabular-nums; text-align: right; }
 #tabla-catalogo tbody tr { cursor: pointer; }
 .envoltorio-tabla { overflow-x: auto; }
-table.catalogo { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+table.catalogo { width: 100%; min-width: 820px; border-collapse: collapse; font-size: 13.5px; }
+table.catalogo th:first-child, table.catalogo td:first-child { min-width: 220px; }
 table.catalogo th {
   text-align: left; font-weight: 600; color: var(--tinta-2); font-size: 12.5px;
   padding: 8px 10px; border-bottom: 1px solid var(--base); cursor: pointer; white-space: nowrap; user-select: none;
@@ -327,7 +328,7 @@ table.catalogo tr:hover td { background: color-mix(in srgb, var(--tinta) 3%, tra
 .leyenda-mapa { margin: 10px 0 0; }
 .panel-paises { border-left: 1px solid var(--grid); padding-left: 18px; min-width: 0; }
 .panel-paises h3 { font-family: var(--serif); font-weight: 500; font-size: 17px; margin-bottom: 6px; }
-.fila-pais { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: baseline; width: 100%; text-align: left; background: none; border: none; border-bottom: 1px solid var(--grid); cursor: pointer; padding: 6px 4px; font: 13.5px var(--sans); color: var(--tinta); }
+.fila-pais { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: baseline; width: 100%; text-align: left; background: none; border: none; border-bottom: 1px solid var(--grid); cursor: pointer; padding: 10px 4px; font: 13.5px var(--sans); color: var(--tinta); }
 .fila-pais:hover { background: color-mix(in srgb, var(--tinta) 4%, transparent); }
 .fila-pais .cuenta { color: var(--tinta-2); font-variant-numeric: tabular-nums; font-weight: 600; }
 .panel-paises .volver { background: none; border: none; cursor: pointer; color: var(--acento); font: 13px var(--sans); padding: 0 0 8px; }
@@ -354,6 +355,23 @@ table.catalogo tr:hover td { background: color-mix(in srgb, var(--tinta) 3%, tra
   .rankings-dimension { grid-template-columns: 1fr; gap: 20px; }
   .rankings-dimension .divisor { display: none; }
   .ficha-libro { grid-template-columns: 1fr; }
+
+  /* el modo "ajustado" (sin scroll, fit exacto al alto de ventana) es una
+     comodidad de escritorio; en pantallas angostas no hay alto suficiente
+     y termina achicando los gráficos hasta hacerlos desaparecer, así que
+     se desactiva y esas pestañas vuelven a hacer scroll normal */
+  body.ajustada { overflow: visible; }
+  body.ajustada .envoltura { height: auto; overflow: visible; }
+  body.ajustada section[role="tabpanel"].activa { display: block; flex: none; min-height: auto; }
+  body.ajustada #panel-estanteria .tarjeta.ancha { flex: none; min-height: auto; overflow-y: visible; }
+  body.ajustada .estanteria { flex: none; min-height: auto; align-items: normal; }
+  body.ajustada .estantes { flex: none; align-items: flex-end; }
+  body.ajustada .lomos { height: 172px; flex: none; min-height: auto; }
+  body.ajustada .rejilla-anios { flex: none; min-height: auto; grid-template-rows: none; }
+  body.ajustada .columna-anios { min-height: auto; }
+  body.ajustada .rejilla-anios .tarjeta { min-height: auto; overflow-y: visible; }
+  body.ajustada .rejilla-anios .tarjeta > div:last-child { flex: none; display: block; }
+  body.ajustada .rejilla-anios svg.grafico { height: auto; }
 }
 @media (max-width: 640px) {
   .envoltura { padding: 20px 14px 56px; }
